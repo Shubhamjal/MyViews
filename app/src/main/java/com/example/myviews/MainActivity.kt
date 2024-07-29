@@ -24,14 +24,22 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
+
         binding.ListViewbtn.setOnClickListener {
             var intent= Intent(this,ListViewActivity::class.java)
             startActivity(intent)
         }
+
+
         binding.SpinnerViewbtn.setOnClickListener {
             var intent= Intent(this,SpinnerViewActivity::class.java)
             startActivity(intent)
         }
+
+
+
 
     }
 }
