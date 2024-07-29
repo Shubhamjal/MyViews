@@ -13,6 +13,13 @@
         android:theme="@style/Theme.MyViews"
         tools:targetApi="31">
         <activity
+            android:name=".add_dialogboxspinner"
+            android:exported="false"
+            android:theme="@style/Theme.MyViews" />
+        <activity
+            android:name=".SpinnerViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ListViewActivity"
             android:exported="false" />
         <activity

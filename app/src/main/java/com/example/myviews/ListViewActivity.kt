@@ -48,6 +48,7 @@ class ListViewActivity : AppCompatActivity() {
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.update_dialogbox)
 
+
         }
 
         //setting up toast for item being long clicked in the list
