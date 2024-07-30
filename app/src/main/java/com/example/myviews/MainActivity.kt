@@ -38,6 +38,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.ListBaseAdapter.setOnClickListener {
+            var intent= Intent(this,ListBaseAdapterActivity::class.java)
+            startActivity(intent)
+
+        }
+
 
 
 

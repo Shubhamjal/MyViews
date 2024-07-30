@@ -21,28 +21,17 @@ class ListBaseAdapterActivity : AppCompatActivity() {
         binding= ActivityListBaseAdapterBinding.inflate(layoutInflater)  //binding initialization
         setContentView(binding.root)
 
-
-        setContentView(R.layout.activity_list_base_adapter)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        studentlist.add(Student(RollNo = 1,"Test","c"))
-        studentlist.add(Student(RollNo = 2,"best","c++"))
-        studentlist.add(Student(RollNo = 3,"jest","java"))
-      // binding.baseadapterlistview.adapter=lisAdapter
+        studentlist.add(Student(  1,"Test","c"))
+        studentlist.add(Student(  2,"best","c++"))
+        studentlist.add(Student(  3,"jest","java"))
 
-      //  binding?.list
-
-
-
-
-
-
-
-
+       binding.baseadapterlistview.adapter=listAdapter
 
 
     }

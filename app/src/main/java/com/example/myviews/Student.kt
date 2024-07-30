@@ -6,7 +6,7 @@ data class Student(
     var subject: String?="",
 ){
     override fun toString(): String {
-        return "$RollNo\n$Name ${subject}"
+        return "$RollNo\n$Name\n$subject"
     }
 }
 

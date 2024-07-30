@@ -1,8 +1,10 @@
 package com.example.myviews
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -51,21 +53,21 @@ class ListViewActivity : AppCompatActivity() {
             dialog.setContentView(R.layout.list_update_dialogbox)
             val updated=dialog.findViewById<EditText>(R.id.Update_box)
             val btn=dialog.findViewById<Button>(R.id.Save_btn_list)
+
             btn.setOnClickListener {
                 array.set(position,updated.text.toString())
                 arrayAdapter?.notifyDataSetChanged()
                 dialog.dismiss()
             }
             dialog.show()
-
-
         }
+
 
         //setting up toast for item being long clicked in the list
         binding.ListView.setOnItemLongClickListener { parent, view, position, id ->
             //code for deleting the longclocked data
             val dialog=Dialog(this)
-           // dialog.setContentView(R.id.list_delete_dialogbox)//    this is not working
+            dialog.setContentView(R.layout.list_delete_dialogbox)
             val btn1=dialog.findViewById<Button>(R.id.yes_btn_list)
             val btn2=dialog.findViewById<Button>(R.id.no_btn_list)
             dialog.show()
@@ -83,9 +85,7 @@ class ListViewActivity : AppCompatActivity() {
         }
 
 
-
-
-
+        //code for adding new data
         binding.FabBtn.setOnClickListener {                //adding alert dialog box to the floating action button
             val dialog = Dialog(this)
             dialog.setContentView(R.layout.list_add_dialogbox)
@@ -103,3 +103,30 @@ class ListViewActivity : AppCompatActivity() {
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

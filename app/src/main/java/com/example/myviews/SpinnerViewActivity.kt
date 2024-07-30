@@ -21,6 +21,7 @@ class SpinnerViewActivity : AppCompatActivity() {
     lateinit var binding: ActivitySpinnerViewBinding  //Activity binding
     lateinit var arrayAdapter:ArrayAdapter<String>
     var spinnervalues = mutableListOf("one","Two","Thee")
+    var DynamicSpinner= mutableListOf("one","two","three")
 
 
 
@@ -61,6 +62,10 @@ class SpinnerViewActivity : AppCompatActivity() {
         }
 
 
+
+
+
+
         //Dynamic Spinner Implementation
         arrayAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,spinnervalues)
         binding.DynamicSpinner.adapter=arrayAdapter
@@ -69,7 +74,9 @@ class SpinnerViewActivity : AppCompatActivity() {
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
-                id: Long) {
+                id: Long
+            ) {
+
                 var selectedItem=binding.DynamicSpinner.selectedItem as String
                 Toast.makeText(this@SpinnerViewActivity,"$selectedItem",Toast.LENGTH_SHORT).show()
 
@@ -81,7 +88,7 @@ class SpinnerViewActivity : AppCompatActivity() {
             }
         }
 
-        //updating the data
+      /*  //updating the data
         binding.DynamicSpinner.setOnItemClickListener{ parent,view,position,id->
             Toast.makeText(this,"$position",Toast.LENGTH_SHORT).show()
             //code for updating the clicked data
@@ -98,10 +105,10 @@ class SpinnerViewActivity : AppCompatActivity() {
             dialog.show()
 
         }
+*/
 
 
-
-
+/*
         //deleting the data
         binding.DynamicSpinner.setOnItemLongClickListener{ parent: AdapterView<*>, view: View, position: Int, id: Long ->
 
@@ -125,14 +132,14 @@ class SpinnerViewActivity : AppCompatActivity() {
 
         }
 
-
+*/
 
 
 
 
 
         //adding the data
-        binding.FabBtn2.setOnClickListener{
+        binding.FabBtn1.setOnClickListener{
             val dialog=Dialog(this)
             dialog.setContentView(R.layout.spinner_add_dialogbox)
             val data_entered = dialog.findViewById<EditText>(R.id.DataEntered)
@@ -144,6 +151,7 @@ class SpinnerViewActivity : AppCompatActivity() {
             }
             dialog.show()
         }
+
 
 
 
