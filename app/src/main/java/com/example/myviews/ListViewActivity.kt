@@ -1,8 +1,8 @@
 package com.example.myviews
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -21,6 +21,7 @@ class ListViewActivity : AppCompatActivity() {
     private val TAG = "ListViewActivity"
 
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -45,27 +46,49 @@ class ListViewActivity : AppCompatActivity() {
 
           Toast.makeText(this,"$position",Toast.LENGTH_SHORT).show()
 
+            //code for updating the clicked data
             val dialog = Dialog(this)
-            dialog.setContentView(R.layout.update_dialogbox)
+            dialog.setContentView(R.layout.list_update_dialogbox)
+            val updated=dialog.findViewById<EditText>(R.id.Update_box)
+            val btn=dialog.findViewById<Button>(R.id.Save_btn_list)
+            btn.setOnClickListener {
+                array.set(position,updated.text.toString())
+                arrayAdapter?.notifyDataSetChanged()
+                dialog.dismiss()
+            }
+            dialog.show()
 
 
         }
 
         //setting up toast for item being long clicked in the list
         binding.ListView.setOnItemLongClickListener { parent, view, position, id ->
-
-            Toast.makeText(this@ListViewActivity,"$position",Toast.LENGTH_SHORT).show()
+            //code for deleting the longclocked data
+            val dialog=Dialog(this)
+          //  dialog.setContentView(R.id.list)//    this is not working
+            val btn1=dialog.findViewById<Button>(R.id.yes_btn_list)
+            val btn2=dialog.findViewById<Button>(R.id.no_btn_list)
+            dialog.show()
+            btn1.setOnClickListener {
+                array.removeAt(position)
+                arrayAdapter?.notifyDataSetChanged()
+                dialog.dismiss()
+            }
+            btn2.setOnClickListener {
+                Toast.makeText(this,"deletion Canceled",Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }
             return@setOnItemLongClickListener true
 
         }
-        arrayAdapter?.notifyDataSetChanged()
+
 
 
 
 
         binding.FabBtn.setOnClickListener {                //adding alert dialog box to the floating action button
             val dialog = Dialog(this)
-            dialog.setContentView(R.layout.add_dialogbox)
+            dialog.setContentView(R.layout.list_add_dialogbox)
             val entered_data = dialog.findViewById<EditText>(R.id.EnteredData)   //val entered_data=Entered data
             val btn = dialog.findViewById<Button>(R.id.Enterbtn)  //val btn = Enterbtn
 
