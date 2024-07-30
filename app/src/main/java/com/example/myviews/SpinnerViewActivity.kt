@@ -109,6 +109,7 @@ class SpinnerViewActivity : AppCompatActivity() {
             dialog.setContentView(R.layout.spinner_delete_dialogbox)
             val btn1 = dialog.findViewById<Button>(R.id.yes_btn_spinner)
             val btn2 = dialog.findViewById<Button>(R.id.no_btn_spinner)
+
             dialog.show()
 
             btn1.setOnClickListener {

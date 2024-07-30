@@ -65,7 +65,7 @@ class ListViewActivity : AppCompatActivity() {
         binding.ListView.setOnItemLongClickListener { parent, view, position, id ->
             //code for deleting the longclocked data
             val dialog=Dialog(this)
-          //  dialog.setContentView(R.id.list)//    this is not working
+           // dialog.setContentView(R.id.list_delete_dialogbox)//    this is not working
             val btn1=dialog.findViewById<Button>(R.id.yes_btn_list)
             val btn2=dialog.findViewById<Button>(R.id.no_btn_list)
             dialog.show()
