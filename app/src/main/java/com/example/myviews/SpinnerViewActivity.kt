@@ -16,6 +16,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.myviews.databinding.ActivitySpinnerViewBinding
 
+
+
 class SpinnerViewActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySpinnerViewBinding  //Activity binding
@@ -39,11 +41,8 @@ class SpinnerViewActivity : AppCompatActivity() {
             insets
         }
 
-
-
-
         //normal spinner implementation
-        binding.Spinner.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
+        binding.Spinner.onItemSelectedListener= object : OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -67,7 +66,7 @@ class SpinnerViewActivity : AppCompatActivity() {
 
 
         //Dynamic Spinner Implementation
-        arrayAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,spinnervalues)
+        arrayAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,DynamicSpinner)
         binding.DynamicSpinner.adapter=arrayAdapter
         binding.DynamicSpinner.onItemSelectedListener=object:OnItemSelectedListener{
             override fun onItemSelected(
@@ -77,8 +76,9 @@ class SpinnerViewActivity : AppCompatActivity() {
                 id: Long
             ) {
 
+
                 var selectedItem=binding.DynamicSpinner.selectedItem as String
-                Toast.makeText(this@SpinnerViewActivity,"$selectedItem",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SpinnerViewActivity,"selectedItem",Toast.LENGTH_SHORT).show()
 
                 TODO("Not yet implemented")
             }
@@ -88,72 +88,112 @@ class SpinnerViewActivity : AppCompatActivity() {
             }
         }
 
-      /*  //updating the data
-        binding.DynamicSpinner.setOnItemClickListener{ parent,view,position,id->
-            Toast.makeText(this,"$position",Toast.LENGTH_SHORT).show()
-            //code for updating the clicked data
-            val dialog=Dialog(this)
-            dialog.setContentView(R.layout.spinner_update_dialogbox)
-            val update=dialog.findViewById<TextView>(R.id.Spinner_Update_Box)
-            val btn=dialog.findViewById<Button>(R.id.Update_btn_spinner)
-
-            btn.setOnClickListener {
-                spinnervalues.set(position,update.text.toString())
-                arrayAdapter.notifyDataSetChanged()
-                dialog.dismiss()
-            }
-            dialog.show()
-
-        }
-*/
-
-
-/*
-        //deleting the data
-        binding.DynamicSpinner.setOnItemLongClickListener{ parent: AdapterView<*>, view: View, position: Int, id: Long ->
-
-            val dialog=Dialog(this)
-            dialog.setContentView(R.layout.spinner_delete_dialogbox)
-            val btn1 = dialog.findViewById<Button>(R.id.yes_btn_spinner)
-            val btn2 = dialog.findViewById<Button>(R.id.no_btn_spinner)
-
-            dialog.show()
-
-            btn1.setOnClickListener {
-                spinnervalues.removeAt(position)
-                arrayAdapter.notifyDataSetChanged()
-                dialog.dismiss()
-            }
-            btn2.setOnClickListener {
-                Toast.makeText(this,"deletion canceled",Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
-            }
-            return@setOnItemLongClickListener true
-
-        }
-
-*/
-
-
-
-
-
-        //adding the data
-        binding.FabBtn1.setOnClickListener{
-            val dialog=Dialog(this)
+       binding. FabBtn1.setOnClickListener {
+            // Show dialog to add item
+            val dialog = Dialog(this)
             dialog.setContentView(R.layout.spinner_add_dialogbox)
-            val data_entered = dialog.findViewById<EditText>(R.id.DataEntered)
-            val btn = dialog.findViewById<Button>(R.id.Enterbtnspinner)
-            btn.setOnClickListener {
-                spinnervalues.add(data_entered.text.toString())
-                arrayAdapter.notifyDataSetChanged()
-                dialog.dismiss()
+            val editText: EditText = dialog.findViewById(R.id.DataEntered)
+            val button: Button = dialog.findViewById(R.id.Enterbtnspinner)
+
+            button.setOnClickListener {
+                val newItem = editText.text.toString()
+                if (newItem.isNotEmpty()) {
+                    DynamicSpinner.add(newItem)
+                    arrayAdapter.notifyDataSetChanged()
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(this, "Please enter a valid item", Toast.LENGTH_SHORT).show()
+                }
             }
+
             dialog.show()
         }
-
-
-
-
     }
 }
+
+//        //adding the data
+//        binding.FabBtn1.setOnClickListener{
+//            val dialog=Dialog(this)
+//            dialog.setContentView(R.layout.spinner_add_dialogbox)
+//            val data_entered = dialog.findViewById<EditText>(R.id.DataEntered)
+//            val btn = dialog.findViewById<Button>(R.id.Enterbtnspinner)
+//            btn.setOnClickListener {
+//                DynamicSpinner.add(data_entered.text.toString())
+//                arrayAdapter.notifyDataSetChanged()
+//                dialog.dismiss()
+//            }
+//            dialog.show()
+//        }
+//
+//        //deleting the data
+//        binding.FabBtn2.setOnClickListener{
+//            val dialog=Dialog(this)
+//            dialog.setContentView(R.layout.spinner_delete_dialogbox)
+//            val btn1 = dialog.findViewById<Button>(R.id.yes_btn_spinner)
+//            val btn2 = dialog.findViewById<Button>(R.id.no_btn_spinner)
+//            dialog.show()
+//            btn1.setOnClickListener {
+//
+//            }
+//
+//        }
+//
+//
+//        //deleting the data
+//        binding.DynamicSpinner.setOnItemLongClickListener{ parent: AdapterView<*>, view: View, position: Int, id: Long ->
+//
+//            val dialog=Dialog(this)
+//            dialog.setContentView(R.layout.spinner_delete_dialogbox)
+//            val btn1 = dialog.findViewById<Button>(R.id.yes_btn_spinner)
+//            val btn2 = dialog.findViewById<Button>(R.id.no_btn_spinner)
+//
+//            dialog.show()
+//
+//            btn1.setOnClickListener {
+//                spinnervalues.removeAt(position)
+//                arrayAdapter.notifyDataSetChanged()
+//                dialog.dismiss()
+//            }
+//            btn2.setOnClickListener {
+//                Toast.makeText(this,"deletion canceled",Toast.LENGTH_SHORT).show()
+//                dialog.dismiss()
+//            }
+//            return@setOnItemLongClickListener true
+//
+//        }
+//
+//
+//
+//
+//
+//
+//
+//        //updating the data
+//        binding.DynamicSpinner.setOnItemClickListener{ parent,view,position,id->
+//            Toast.makeText(this,"$position",Toast.LENGTH_SHORT).show()
+//            //code for updating the clicked data
+//            val dialog=Dialog(this)
+//            dialog.setContentView(R.layout.spinner_update_dialogbox)
+//            val update=dialog.findViewById<TextView>(R.id.Spinner_Update_Box)
+//            val btn=dialog.findViewById<Button>(R.id.Update_btn_spinner)
+//
+//            btn.setOnClickListener {
+//                spinnervalues.set(position,update.text.toString())
+//                arrayAdapter.notifyDataSetChanged()
+//                dialog.dismiss()
+//            }
+//            dialog.show()
+//
+//        }
+//
+
+
+
+
+
+
+
+
+
+
+
